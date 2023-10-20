@@ -1,6 +1,9 @@
 # MIDI connector written in VB
 
 Presented here is a simple MIDI-in to MIDI-out connector.
+
+Simply select an input and an output, then hit connect.
+
 It supports the standard 3-byte MIDI messages but not SYSEX messages.
 
 ![MIDIconnector](https://github.com/psitech/MIDI-connector-written-in-VB/assets/27091013/85e0220e-47f6-4475-9b95-8b89cfec5ef9)
