@@ -2,7 +2,7 @@
 
 Presented here is a simple MIDI-in to MIDI-out connector.
 
-Simply select an input and an output, then hit connect.
+Just select an input device & an output device, and hit connect. MIDI data will then be forwarded transparently.
 
 It supports the standard 3-byte MIDI messages but not SYSEX messages.
 
@@ -10,7 +10,7 @@ It supports the standard 3-byte MIDI messages but not SYSEX messages.
 
 In the ZIP file, you can find a Windows 64-bit executable.
 
-Here is the code:
+Below is the code. Used Visual Studio Community 2022.
 ```Visual Basic .NET
 Imports System.Runtime.InteropServices
 Imports System.Windows.Forms.VisualStyles.VisualStyleElement
