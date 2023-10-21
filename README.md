@@ -1,14 +1,17 @@
-# MIDI connector written in VB
+# MIDI connector written in VB.NET
 
-Presented here is a simple MIDI-in to MIDI-out connector.
+Presented here is a simple MIDI-in to MIDI-out connector. 
+Also known as MIDI-router, MIDI-patchbay, MIDI-through, MIDI-thru, etc.
+
+![MIDI connector](https://github.com/psitech/MIDI-connector-written-in-VB/assets/27091013/722e3bd0-1d4e-4d40-b062-ccfe6f1c60a0)
 
 Just select an input device & an output device, and hit connect. MIDI data will then be forwarded transparently.
 
-It supports the standard 3-byte MIDI messages but not SYSEX messages.
+> [!NOTE]
+> It supports standard 3-byte MIDI messages, not SYSEX messages.
 
-![MIDIconnector](https://github.com/psitech/MIDI-connector-written-in-VB/assets/27091013/85e0220e-47f6-4475-9b95-8b89cfec5ef9)
 
-In the ZIP file, you can find a Windows 64-bit executable.
+In the ZIP file, you can find the complete project (.sln) and a Windows10 64-bit executable.
 
 Below is the code. Used Visual Studio Community 2022.
 ```Visual Basic .NET
