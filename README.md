@@ -15,9 +15,8 @@ In the ZIP file, you can find the complete project (.sln) and a Windows10 64-bit
 
 Below is the code. Used Visual Studio Community 2022.
 ```Visual Basic .NET
+
 Imports System.Runtime.InteropServices
-Imports System.Windows.Forms.VisualStyles.VisualStyleElement
-Imports System.Windows.Forms.VisualStyles.VisualStyleElement.ToolBar
 
 Public Class Form1
     Private Declare Function midiInGetNumDevs Lib "winmm.dll" () As Integer
@@ -42,19 +41,19 @@ Public Class Form1
     Public Const MIDI_IO_STATUS = &H20
 
     Public Structure MIDIINCAPS
-        Dim wMid As Short 
-        Dim wPid As Short 
-        Dim vDriverVersion As Integer 
-        <VBFixedString(32), MarshalAs(UnmanagedType.ByValTStr, SizeConst:=32)> Public szPname As String 
-        Dim dwSupport As Integer 
+        Dim wMid As Short ' Manufacturer ID
+        Dim wPid As Short ' Product ID
+        Dim vDriverVersion As Integer ' Driver version
+        <VBFixedString(32), MarshalAs(UnmanagedType.ByValTStr, SizeConst:=32)> Public szPname As String ' Product Name
+        Dim dwSupport As Integer ' Reserved
     End Structure
 
     Public Structure MIDIOUTCAPS
-        Dim wMid As Short 
-        Dim wPid As Short 
-        Dim vDriverVersion As Integer 
-        <VBFixedString(32), MarshalAs(UnmanagedType.ByValTStr, SizeConst:=32)> Public szPname As String 
-        Dim dwSupport As Integer 
+        Dim wMid As Short
+        Dim wPid As Short
+        Dim vDriverVersion As Integer
+        <VBFixedString(32), MarshalAs(UnmanagedType.ByValTStr, SizeConst:=32)> Public szPname As String
+        Dim dwSupport As Integer
     End Structure
 
     Dim hMidiIn As IntPtr
@@ -71,7 +70,6 @@ Public Class Form1
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Show()
-        ButtonConnect.Enabled = False
 
         If midiInGetNumDevs() = 0 Then
             MsgBox("No MIDI devices connected")
@@ -79,7 +77,6 @@ Public Class Form1
         End If
 
         Dim InCaps As New MIDIINCAPS
-
         For DevCnt = 0 To (midiInGetNumDevs - 1)
             midiInGetDevCaps(DevCnt, InCaps, Len(InCaps))
             ComboBoxInputDevice.Items.Add(InCaps.szPname)
@@ -92,22 +89,22 @@ Public Class Form1
         Next DevCnt
     End Sub
 
-    Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBoxInputDevice.SelectedIndexChanged
+    Private Sub ComboBoxInputDevice_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBoxInputDevice.SelectedIndexChanged
         DeviceInID = ComboBoxInputDevice.SelectedIndex
     End Sub
 
-    Private Sub ComboBox2_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBoxOutputDevice.SelectedIndexChanged
+    Private Sub ComboBoxOutputDevice_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBoxOutputDevice.SelectedIndexChanged
         DeviceOutID = ComboBoxOutputDevice.SelectedIndex
         ButtonConnect.Enabled = True
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles ButtonConnect.Click
+    Private Sub ButtonConnect_Click(sender As Object, e As EventArgs) Handles ButtonConnect.Click
         If (isConnected = False) Then
             midiInOpen(hMidiIn, DeviceInID, ptrCallback, 0, CALLBACK_FUNCTION Or MIDI_IO_STATUS)
             midiOutOpen(hMidiOut, DeviceOutID, ptrCallback, 0, 0)
             midiInStart(hMidiIn)
             isConnected = True
-            Label3.Visible = True
+            FlowAnimation.Visible = True
             ComboBoxInputDevice.Enabled = False
             ComboBoxOutputDevice.Enabled = False
             ButtonConnect.Text = "Disconnect"
@@ -118,7 +115,7 @@ Public Class Form1
             midiOutReset(hMidiOut)
             midiOutClose(hMidiOut)
             isConnected = False
-            Label3.Visible = False
+            FlowAnimation.Visible = False
             ComboBoxInputDevice.Enabled = True
             ComboBoxOutputDevice.Enabled = True
             ButtonConnect.Text = "Connect"
@@ -134,4 +131,7 @@ Public Class Form1
         Application.Exit()
     End Sub
 End Class
+
+' https://learn.microsoft.com/en-us/windows/win32/multimedia/midi-functions
+
 ```
