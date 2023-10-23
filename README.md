@@ -14,7 +14,7 @@ Just select an input device & an output device, and hit connect. MIDI data will 
 In the ZIP file, you can find the complete project (.sln) and a Windows10 64-bit executable.
 
 Below is the code. Used Visual Studio Community 2022.
-```Visual Basic .NET
+```vb
 
 Imports System.Runtime.InteropServices
 
@@ -64,7 +64,7 @@ Public Class Form1
     Dim DevCnt As Integer
 
     Public Function MidiInProc(hMidiIn As IntPtr, wMsg As UInteger, dwInstance As Integer, dwParam1 As Integer, dwParam2 As Integer) As Integer
-        midiOutShortMsg(hMidiOut, wMsg)
+        midiOutShortMsg(hMidiOut, dwParam1)
         Return Nothing
     End Function
 
@@ -110,9 +110,7 @@ Public Class Form1
             ButtonConnect.Text = "Disconnect"
         Else
             midiInStop(hMidiIn)
-            midiInReset(hMidiIn)
             midiInClose(hMidiIn)
-            midiOutReset(hMidiOut)
             midiOutClose(hMidiOut)
             isConnected = False
             FlowAnimation.Visible = False
@@ -124,14 +122,11 @@ Public Class Form1
 
     Private Sub Form1_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         midiInStop(hMidiIn)
-        midiInReset(hMidiIn)
         midiInClose(hMidiIn)
-        midiOutReset(hMidiOut)
         midiOutClose(hMidiOut)
         Application.Exit()
     End Sub
 End Class
-
 ' https://learn.microsoft.com/en-us/windows/win32/multimedia/midi-functions
 
 ```
