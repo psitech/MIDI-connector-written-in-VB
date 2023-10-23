@@ -15,7 +15,6 @@ In the ZIP file, you can find the complete project (.sln) and a Windows10 64-bit
 
 Below is the code. Used Visual Studio Community 2022.
 ```vb
-
 Imports System.Runtime.InteropServices
 
 Public Class Form1
@@ -127,6 +126,4 @@ Public Class Form1
         Application.Exit()
     End Sub
 End Class
-' https://learn.microsoft.com/en-us/windows/win32/multimedia/midi-functions
-
 ```
